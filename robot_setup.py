@@ -5,6 +5,9 @@ from ev3dev.ev3 import *
 # Wrapper Functions around the ev3dev API
 #
 
+MAX_FREQUENCY = 10000
+MAX_BEEP_DURATION = 10
+
 # Motor setup
 left = Motor('outA')
 right = Motor('outB')
@@ -22,6 +25,8 @@ def beep(frequency, duration):
     :param duration: Duration to play tone in seconds.
     :return: None
     """
+    duration = min(duration, MAX_BEEP_DURATION)
+    frequency = min(frequency, MAX_FREQUENCY)
     Sound.tone(frequency, duration * 1000)
     sleep(duration)
 
